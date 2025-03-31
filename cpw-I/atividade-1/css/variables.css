@@ -1,0 +1,29 @@
+/* Import font */
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&display=swap');
+
+/* All variables */
+:root {
+
+    /* Colors */
+    --primary-color: #5C9DFF;
+    --primary-color-alternative: #3a7fe7;
+    --primary-color-hover: #225eb9;
+    --color-2: #232C33;
+    --color-3: #E6E8E6;
+    --color-4: #9FB8AD;
+    --color-5: #AD343E;
+
+    /* Typography */
+    --primary-font: 'Nunito Sans', sans-serif;
+    --font-regular: 400;
+    --font-medium: 500;
+    --font-semibold: 600;
+    --font-bold: 700;
+    --font-size-sm: 0.875rem;
+    --font-size-md: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 2rem;
+    --font-size-4xl: 3rem;
+}
