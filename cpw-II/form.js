@@ -14,3 +14,14 @@ function mostrarDadosRadio() {
     resposta.innerText = radio;
 }
 
+function mostrarDadosCheckbox() {
+    const resposta = document.getElementById("respostaCheckbox");
+    const checkbox = document.querySelectorAll('input[name="sentido"]:checked');
+    let text = "";
+
+    checkbox.forEach(element => {
+        text += element.value + "<br>";
+    });
+
+    resposta.innerHTML = text;
+}

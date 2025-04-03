@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Forms</title>
     <script src="./form.js" defer></script>
 </head>
 
@@ -36,7 +36,14 @@
     Não: <input type="radio" name="email" value="Não">
     <p id="respostaRadio"></p>
     <button onclick="mostrarDadosRadio()">OK</button>
-    
+
+    <p>Qual o sentido da vida?</p>
+    Viver: <input type="checkbox" name="sentido" value="viver">
+    Pular: <input type="checkbox" name="sentido" value="pular">
+    Correr: <input type="checkbox" name="sentido" value="correr">
+    <p id="respostaCheckbox"></p>
+    <button onclick="mostrarDadosCheckbox()">OK</button>
+
 </body>
 
 </html>
