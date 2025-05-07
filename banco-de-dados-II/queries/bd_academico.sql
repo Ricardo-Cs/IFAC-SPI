@@ -1,16 +1,43 @@
-
 -- Criar banco de dados
 CREATE DATABASE IF NOT EXISTS ifac;
 USE ifac;
 
 -- Tabela alunos
-CREATE TABLE alunos (
+CREATE TABLE IF NOT EXISTS alunos (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(100),
     email VARCHAR(100),
     data_nascimento DATE
 );
 
+-- Tabela professores
+CREATE TABLE IF NOT EXISTS professores (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100),
+    email VARCHAR(100),
+    titulacao VARCHAR(50)
+);
+
+-- Tabela disciplinas
+CREATE TABLE IF NOT EXISTS disciplinas (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100),
+    carga_horaria INT,
+    id_professor INT,
+    FOREIGN KEY (id_professor) REFERENCES professores(id)
+);
+
+-- Tabela notas
+CREATE TABLE IF NOT EXISTS notas (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    id_aluno INT,
+    id_disciplina INT,
+    nota DECIMAL(4,2),
+    FOREIGN KEY (id_aluno) REFERENCES alunos(id),
+    FOREIGN KEY (id_disciplina) REFERENCES disciplinas(id)
+);
+
+-- Inserir alunos
 INSERT INTO alunos (nome, email, data_nascimento) VALUES
 ('Ana Souza', 'ana@ifac.edu.br', '2005-03-12'),
 ('Bruno Lima', 'bruno@ifac.edu.br', '2004-07-23'),
@@ -21,16 +48,19 @@ INSERT INTO alunos (nome, email, data_nascimento) VALUES
 ('Gabriel Costa', 'gabriel@ifac.edu.br', '2004-08-09'),
 ('Helena Dias', 'helena@ifac.edu.br', '2003-10-17'),
 ('Igor Martins', 'igor@ifac.edu.br', '2006-02-25'),
-('Juliana Freitas', 'juliana@ifac.edu.br', '2005-09-01');
+('Juliana Freitas', 'juliana@ifac.edu.br', '2005-09-01'),
+('Ana Paula', 'anapaula@ifac.edu.br', '2004-06-10'),
+('Ana Clara', 'anaclara@ifac.edu.br', '2006-04-02'),
+('Ana Júlia', 'anajulia@ifac.edu.br', '2005-02-22'),
+('Carlos Eduardo', 'cadu@ifac.edu.br', '2003-11-11'),
+('Bruna Souza', 'brunasouza@ifac.edu.br', '2004-12-15'),
+('João Silva', 'joaosilva@ifac.edu.br', '2005-09-09'),
+('Joana Santos', 'joana@ifac.edu.br', '2006-01-25'),
+('André Souza', 'andresouza@ifac.edu.br', '2004-10-01'),
+('Ana Beatriz', 'anabeatriz@ifac.edu.br', '2005-07-07'),
+('Beatriz Souza', 'beatriz@ifac.edu.br', '2005-03-30');
 
--- Tabela professores
-CREATE TABLE professores (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(100),
-    email VARCHAR(100),
-    titulacao VARCHAR(50)
-);
-
+-- Inserir professores
 INSERT INTO professores (nome, email, titulacao) VALUES
 ('Maria Almeida', 'maria@ifac.edu.br', 'Mestre'),
 ('João Pedro', 'joao@ifac.edu.br', 'Doutor'),
@@ -41,17 +71,12 @@ INSERT INTO professores (nome, email, titulacao) VALUES
 ('Renata Lima', 'renata@ifac.edu.br', 'Doutor'),
 ('Sérgio Oliveira', 'sergio@ifac.edu.br', 'Especialista'),
 ('Aline Matos', 'aline@ifac.edu.br', 'Mestre'),
-('Fábio Rezende', 'fabio@ifac.edu.br', 'Doutor');
+('Fábio Rezende', 'fabio@ifac.edu.br', 'Doutor'),
+('Thiago Fonseca', 'thiago@ifac.edu.br', 'Especialista'),
+('Lívia Martins', 'livia@ifac.edu.br', 'Mestre'),
+('Bruno Andrade', 'brunoandrade@ifac.edu.br', 'Doutor');
 
--- Tabela disciplinas
-CREATE TABLE disciplinas (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(100),
-    carga_horaria INT,
-    id_professor INT,
-    FOREIGN KEY (id_professor) REFERENCES professores(id)
-);
-
+-- Inserir disciplinas
 INSERT INTO disciplinas (nome, carga_horaria, id_professor) VALUES
 ('Matemática', 60, 1),
 ('Português', 60, 2),
@@ -62,18 +87,12 @@ INSERT INTO disciplinas (nome, carga_horaria, id_professor) VALUES
 ('Química', 60, 7),
 ('Inglês', 40, 8),
 ('Educação Física', 30, 9),
-('Artes', 30, 10);
+('Artes', 30, 10),
+('Sociologia', 30, 11),
+('Filosofia', 30, 12),
+('Robótica', 60, 13);
 
--- Tabela notas
-CREATE TABLE notas (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    id_aluno INT,
-    id_disciplina INT,
-    nota DECIMAL(4,2),
-    FOREIGN KEY (id_aluno) REFERENCES alunos(id),
-    FOREIGN KEY (id_disciplina) REFERENCES disciplinas(id)
-);
-
+-- Inserir notas
 INSERT INTO notas (id_aluno, id_disciplina, nota) VALUES
 (1, 1, 8.5),
 (2, 2, 7.0),
@@ -84,4 +103,14 @@ INSERT INTO notas (id_aluno, id_disciplina, nota) VALUES
 (7, 7, 7.3),
 (8, 8, 6.4),
 (9, 9, 9.0),
-(10, 10, 7.8);
+(10, 10, 7.8),
+(11, 1, 8.0),
+(12, 2, 7.4),
+(13, 3, 9.0),
+(14, 4, 6.5),
+(15, 5, 7.9),
+(16, 6, 5.8),
+(17, 7, 8.7),
+(18, 8, 6.2),
+(19, 9, 9.3),
+(20, 10, 7.5);

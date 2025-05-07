@@ -1,4 +1,4 @@
--- Filtros 1 (base de dados: queries/bd_academico.sql)
+-- Funções de SELECT 1 (base de dados: queries/bd_academico.sql)
 USE ifac;
 
 -- ORDER BY
