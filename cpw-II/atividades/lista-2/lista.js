@@ -59,19 +59,19 @@ function maisRepetidos() {
 function quantidadeRepeticoes() {
     const array = arrayNumerosAleatorios();
     const resposta = document.getElementById('quantidade-repeticoes-resposta');
-    const valoresArray = new Map();
+    const valoresMap = new Map();
 
     array.forEach((num) => {
-        if(valoresArray.has(num)) {
-            valoresArray.set(num, valoresArray.get(num) + 1);
+        if(valoresMap.has(num)) {
+            valoresMap.set(num, valoresMap.get(num) + 1);
         } else {
-            valoresArray.set(num, 1);
+            valoresMap.set(num, 1);
         }
     });
 
     array.sort((a, b) => a - b);
     resposta.innerText = `Array Ordenado: ${array} \nQuantidade de Repetições: `;
-    valoresArray.forEach((valor, chave) => {
+    valoresMap.forEach((valor, chave) => {
         resposta.innerText += `\nNúmero: ${chave} - Repetição: ${valor} vez(es)`;
     });
 }
