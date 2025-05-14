@@ -1,0 +1,43 @@
+Aluno: Ricardo Costa da Silva
+
+1 - Liste todos os alunos cujo nome comece com 'Ana'.
+	SELECT * FROM alunos WHERE nome LIKE "Ana%";
+
+2 - Mostre os alunos com data de nascimento entre 01/01/2004 e 31/12/2005.
+	SELECT * FROM alunos WHERE data_nascimento BETWEEN '2004-01-01' AND '2005-12-31';
+
+3 - Liste os professores com titulação 'Mestre' ou 'Doutor'.
+	SELECT * FROM professores WHERE titulacao IN ('Mestre', 'Doutor');
+
+4 - Mostre os alunos cujo nome termina com 'Souza'.
+	SELECT * FROM alunos WHERE nome LIKE "%Souza";
+
+5 - Liste os alunos nascidos em 2006.
+	SELECT * FROM alunos WHERE data_nascimento BETWEEN '2006-01-01' AND '2006-12-31';
+
+6 - Mostre todos os alunos cujo nome contenha a letra 'z'.
+	SELECT * FROM alunos WHERE nome LIKE "%z%";
+
+7 - Liste os professores que não são 'Doutor'.
+	SELECT * FROM professores WHERE titulacao != 'Doutor';
+
+8 - Quantos alunos estão cadastrados no banco? 
+	SELECT COUNT(*) FROM alunos;
+
+9 - Qual é a média geral das notas?
+	SELECT AVG(nota) FROM notas;
+
+10 - Qual é a soma total das notas registradas?
+	SELECT SUM(nota) FROM notas;
+
+11 - Mostre a média de nota por disciplina.
+	SELECT id_disciplina, AVG(nota) FROM notas GROUP BY id_disciplina;
+
+12 - Liste apenas as disciplinas cuja média de nota seja maior que 7.
+	SELECT id_disciplina, AVG(nota) FROM notas GROUP BY id_disciplina HAVING AVG(nota) > 7;
+
+13 - Quantos professores existem por titulação.
+	SELECT titulacao, COUNT(*) FROM professores GROUP BY titulacao;
+
+14 - Liste a quantidade de alunos por data de nascimento.
+	SELECT data_nascimento, COUNT(*) FROM alunos GROUP BY data_nascimento;
