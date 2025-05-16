@@ -9,8 +9,9 @@ public class Aplicacao {
 		Cliente cliente1 = new Cliente("Pedro", "123456789-00", "26-01-2000");
 		cliente1.setEndereco("Rua A");
 		cPedro.setTitular(cliente1);
-		//System.out.println(cliente1); 
-		System.out.println(cPedro);
+		Conta cRicardo = new Conta("121212", "1212121");
+		
+		System.out.println(Conta.contador);
 	}
 
 }
