@@ -1,0 +1,38 @@
+-- 1. Mostre os nomes dos clientes e as datas dos pedidos que realizaram (INNER JOIN).
+SELECT c.nome, p.data 
+FROM clientes c
+INNER JOIN pedidos p ON p.id_cliente = c.id;
+
+-- 2. Liste todos os clientes, mesmo aqueles que ainda não realizaram pedidos (LEFT JOIN).
+SELECT c.nome, p.data 
+FROM clientes c
+LEFT JOIN pedidos p ON p.id_cliente = c.id;
+
+-- 3. Mostre todos os produtos com e sem fornecedor (LEFT JOIN com fornecedores).
+SELECT p.nome AS nome_produto, f.nome AS nome_fornecedor
+FROM produtos p
+LEFT JOIN fornecedores f ON f.id = p.id_fornecedor;
+
+-- 4. Exiba o nome dos fornecedores e os nomes dos produtos fornecidos (INNER JOIN)
+SELECT f.nome AS nome_fornecedor, p.nome AS nome_produtos
+FROM fornecedores f
+INNER JOIN produtos p ON p.id_fornecedor = f.id;
+
+-- 5. Mostre todos os fornecedores, mesmo os que não fornecem produtos (LEFT JOIN).
+SELECT f.nome AS nome_fornecedor, p.nome AS nome_produtos
+FROM fornecedores f
+LEFT JOIN produtos p ON p.id_fornecedor = f.id;
+
+-- 6. Mostre todos os produtos e fornecedores, mesmo sem correspondência (simule FULL JOIN com UNION).
+SELECT p.nome AS nome_produto, f.nome AS nome_fornecedores
+FROM produtos p
+LEFT JOIN fornecedores f ON f.id = p.id_fornecedor
+UNION 
+SELECT p.nome AS nome_produto, f.nome AS nome_fornecedores
+FROM produtos p
+RIGHT JOIN fornecedores f ON f.id = p.id_fornecedor;
+
+-- 7. Liste os nomes dos clientes e seus pedidos, incluindo os que ainda não compraram nada (LEFT JOIN).
+SELECT c.nome AS nome_cliente, p.data AS data_pedido
+FROM clientes c
+LEFT JOIN pedidos p ON p.id_cliente = c.id;
