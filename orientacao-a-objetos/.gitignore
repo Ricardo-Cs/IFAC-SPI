@@ -1,9 +1,11 @@
-# Arquivos de configuração do Eclipse
+﻿# Arquivos de configuração do Eclipse
 **/*.classpath
 **/*.project
 
 # Diretórios bin em qualquer lugar
 **/bin/
+
+**/.settings/
 
 # Outras pastas temporárias
 **/target/
