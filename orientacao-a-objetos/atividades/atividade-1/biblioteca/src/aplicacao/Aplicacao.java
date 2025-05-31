@@ -16,7 +16,7 @@ public class Aplicacao {
 		servico2.listarUsuarios();
 		*/
 		
-		servico.criarLivro("Safadeza", "Euzebio", "3", "Atumalaca", 10);
+		servico.criarLivro("Harry Potter", "Euzebio", "3", "Atumalaca", 10);
 		//servico.consultarLivro("3");
 		//servico.removerLivro("3");
 		

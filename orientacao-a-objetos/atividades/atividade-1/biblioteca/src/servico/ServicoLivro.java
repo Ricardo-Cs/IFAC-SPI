@@ -1,49 +1,58 @@
 package servico;
 
+import java.util.ArrayList;
+
 import modelo.Livro;
 import repositorio.BDSimulado;
 
 public class ServicoLivro {
 	
-	public void criarLivro(String titulo, String autor, String ISBN, String editora, int qtdeExemplar) {
+	public String criarLivro(String titulo, String autor, String ISBN, String editora, int qtdeExemplar) {
 		Livro l = new Livro(titulo, autor, ISBN, editora, qtdeExemplar);
-		if(BDSimulado.addLivro(l)) {
-			System.out.println("\nLivro adicionado com sucesso!");
-		}else {
-			System.out.println("\nLivro não pode ser adicionado!");
+		if(BDSimulado.adicionarLivro(l)) {
+			return "\nLivro adicionado com sucesso!";
+		} else {
+			return "\nLivro n�o pode ser adicionado!";
 		}
 	}
 
-	public void listarLivros() {
+	public String listarLivros() {
+		String s = "";
 		for(Livro livro: BDSimulado.getLivros().values()) {
-			System.out.println("\n------Livro Selecinado-------");
-			System.out.println("Título: " + livro.getTitulo());
-		    System.out.println("Autor: " + livro.getAutor());
-		    System.out.println("ISBN: " + livro.getISBN());
-		    System.out.println("Editora: " + livro.getEditora());
-		    System.out.println("Exemplares: " + livro.getQtdeExemplar());
+			s += "\n------Livro Selecinado-------";
+			s += "Título: " + livro.getTitulo();
+		    s += "Autor: " + livro.getAutor();
+		    s += "ISBN: " + livro.getISBN();
+		    s += "Editora: " + livro.getEditora();
+		    s += "Exemplares: " + livro.getQtdeExemplar(); 
+		}
+		return s;
+	}
+	
+	public String consultarLivro(String ISBN) {
+		Livro livroConsultado = BDSimulado.selecionarLivroPorISBN(ISBN);
+		if(livroConsultado != null) {
+			return "\nLivro encontrado!\n" + livroConsultado;
+		} else {
+			return "\nLivro n�o encontrado!";
 		}
 	}
 	
-	public void consultarLivro(String ISBN) {
-		if(BDSimulado.selecionarCODlivro(ISBN)) {
-			System.out.println("\nLivro encontrado!");
-			System.out.println(BDSimulado.getLivros().get(ISBN));
-		}else {
-			System.out.println("\nLivro não encontrado!");
-		}
-	}
-	
-	public void consultarLivrosAutor(String autor) {
-		for(Livro livro: BDSimulado.getLivros().values()) {
-			if(livro.getAutor() == autor) {
-				System.out.println("\n------Livro Selecinado-------");
-				System.out.println("Título: " + livro.getTitulo());
-			    System.out.println("Autor: " + livro.getAutor());
-			    System.out.println("ISBN: " + livro.getISBN());
-			    System.out.println("Editora: " + livro.getEditora());
-			    System.out.println("Exemplares: " + livro.getQtdeExemplar());
+	public String consultarLivrosAutor(String autor) {
+		ArrayList<Livro> livrosAutor = BDSimulado.selecionarLivroPorAutor(autor);
+		if(!livrosAutor.isEmpty()) {
+			String s = "\nLivros Encontrados!";
+			for(Livro livro: livrosAutor) {
+				s += "\n------Livro Selecinado-------";
+				s += "Título: " + livro.getTitulo();
+				s += "Autor: " + livro.getAutor();
+			    s += "ISBN: " + livro.getISBN();
+			    s += "Editora: " + livro.getEditora();
+			    s += "Exemplares: " + livro.getQtdeExemplar();
 			}
+			return s;
+		} else {
+			return "N�o existem livros do autor " + autor;
 		}
 	}
 	

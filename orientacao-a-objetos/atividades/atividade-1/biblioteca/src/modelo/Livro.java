@@ -15,17 +15,6 @@ public class Livro {
 		this.qtdeExemplar = qtdeExemplar;
 	}
 
-	@Override
-	public String toString() {
-		String s = "\nLivro: " + this.titulo;
-		s += "\nAutor: " + this.autor;
-		s += "\nISBN: " + this.ISBN;
-		s += "\nEditoria: " + this.editora;
-		s += "\nQuantidade de Exemplares: " + this.qtdeExemplar;
-		
-		return s;
-	}
-
 	public String getTitulo() {
 		return titulo;
 	}
@@ -46,19 +35,14 @@ public class Livro {
 		return qtdeExemplar;
 	} 
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@Override
+	public String toString() {
+		String s = "\nLivro: " + this.titulo;
+		s += "\nAutor: " + this.autor;
+		s += "\nISBN: " + this.ISBN;
+		s += "\nEditoria: " + this.editora;
+		s += "\nQuantidade de Exemplares: " + this.qtdeExemplar;
+		
+		return s;
+	}
 }

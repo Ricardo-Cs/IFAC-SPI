@@ -1,5 +1,6 @@
 package repositorio;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import modelo.Livro;
 import modelo.Usuario;
@@ -8,15 +9,12 @@ public class BDSimulado {
 	private static HashMap<String, Livro> livros = new HashMap<String, Livro>();
 	private static HashMap<String, Usuario> usuarios = new HashMap<String, Usuario>();
 	
-	
+	// Metodos Livro
 	public static HashMap<String, Livro> getLivros() {
 		return livros;
 	}
-	public static HashMap<String, Usuario> getUsuarios() {
-		return usuarios;
-	}
 	
-	public static boolean addLivro(Livro livro) {
+	public static boolean adicionarLivro(Livro livro) {
 		String ISBN = livro.getISBN();
 		if(livros.containsKey(ISBN)) {
 			return false;
@@ -25,7 +23,34 @@ public class BDSimulado {
 		return true;
 	}
 	
-	public static boolean addUsuario(Usuario usuario) {
+	public static Livro selecionarLivroPorISBN(String ISBN) {
+		if(livros.containsKey(ISBN)) {
+			return livros.get(ISBN);
+		}
+		return null;
+	}
+	
+	public static ArrayList<Livro> selecionarLivroPorAutor(String autor) {
+		ArrayList<Livro> livrosAutor = new ArrayList<Livro>();
+		for(Livro livro: livros.values()) {
+			if(livro.getAutor() == autor) {
+				livrosAutor.add(livro);
+			}
+		}
+		
+		return livrosAutor;
+	}
+	
+	public static void removerLivro(String ISBN) {
+		livros.remove(ISBN);
+	}
+	
+	// Metodos Usuario
+	public static HashMap<String, Usuario> getUsuarios() {
+		return usuarios;
+	}
+	
+	public static boolean adicionarUsuario(Usuario usuario) {
 		String cpf = usuario.getCpf();
 		if(usuarios.containsKey(cpf)) {
 			return false;
@@ -34,14 +59,14 @@ public class BDSimulado {
 		return true;
 	}
 	
-	public static boolean selecionarCODlivro(String ISBN) {
-		if(livros.containsKey(ISBN)) {
-			return true;
+	public static Usuario selecionarUsuarioPorCPF(String CPF) {
+		if(usuarios.containsKey(CPF)) {
+			return usuarios.get(CPF);
 		}
-		return false;
+		return null;
 	}
 	
-	public static void removerLivro(String ISBN) {
-		livros.remove(ISBN);
+	public static void removerUsuario(String CPF) {
+		usuarios.remove(CPF);
 	}
 }

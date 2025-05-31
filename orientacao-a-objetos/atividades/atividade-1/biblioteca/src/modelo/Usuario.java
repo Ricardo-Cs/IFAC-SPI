@@ -5,7 +5,6 @@ public class Usuario {
 	private String cpf;
 	private String email;
 	
-	
 	public Usuario(String nome, String cpf, String email) {
 		this.nome = nome;
 		this.cpf = cpf;
@@ -35,9 +34,4 @@ public class Usuario {
 		s += "\nE-mail: " + this.email;
 		return s;
 	}
-	
-	
-	
-	
-	
 }
