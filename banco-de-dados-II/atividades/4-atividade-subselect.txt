@@ -22,3 +22,17 @@ SELECT nome,
 FROM clientes c;
 
 -- 4. Mostre o nome dos produtos e o preço total em pedidos que cada um foi vendido.
+SELECT nome,
+  (SELECT SUM(quantidade) 
+   FROM itens_pedido ip
+   WHERE ip.id_produto = p.id) * preco AS total_vendido
+FROM produtos p;
+
+-- 5. Mostre o nome do cliente e o valor médio de seus pedidos.
+SELECT nome,
+  ROUND((
+    SELECT AVG(total)
+    FROM pedidos p
+    WHERE p.id_cliente = c.id
+  ), 2) AS media_pedidos
+FROM clientes c;

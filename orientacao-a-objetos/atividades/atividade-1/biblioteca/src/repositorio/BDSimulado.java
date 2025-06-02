@@ -2,12 +2,15 @@ package repositorio;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import modelo.Emprestimo;
 import modelo.Livro;
 import modelo.Usuario;
 
 public class BDSimulado {
 	private static HashMap<String, Livro> livros = new HashMap<String, Livro>();
 	private static HashMap<String, Usuario> usuarios = new HashMap<String, Usuario>();
+	private static HashMap<String, Emprestimo> emprestimos = new HashMap<String, Emprestimo>();
 	
 	// Metodos Livro
 	public static HashMap<String, Livro> getLivros() {
@@ -69,4 +72,18 @@ public class BDSimulado {
 	public static void removerUsuario(String CPF) {
 		usuarios.remove(CPF);
 	}
+	
+	// Metodos Emprestimo 
+	public static boolean emprestarLivro(Livro livro, Usuario usuario) {
+		if(livros.containsKey(livro.getISBN()) && livro.getQtdeExemplar() <= 1) {
+			return false;
+		}
+		Emprestimo emprestimo = new Emprestimo(livro, usuario);
+		emprestimos.put(emprestimo.getId(), emprestimo);
+		return true;
+	}
+	
+//	public static boolean devolverLivro(Livro livro, Usuario usuario, String dataEmprestimo) {
+//		if(livros.)
+//	}
 }

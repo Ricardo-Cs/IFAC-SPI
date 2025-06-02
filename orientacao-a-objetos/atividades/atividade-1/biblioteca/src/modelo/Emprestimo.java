@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Emprestimo {
 	private static int contador = 1;
-	private int id = contador;
+	private String id;
 	private Livro livroEmprestado;
 	private Usuario usuario;
 	private boolean devolvido = false;
@@ -15,6 +15,7 @@ public class Emprestimo {
 	public Emprestimo(Livro livroEmprestado, Usuario usuario) {
 		this.livroEmprestado = livroEmprestado;
 		this.usuario = usuario;
+		this.id = definirId();
 		contador++;
 	}
 	
@@ -22,8 +23,17 @@ public class Emprestimo {
 		this(livroEmprestado, usuario);
 		this.dataEmprestimo = dataEmprestimo;
 	}
+	
+	private String definirId() {
+		String id = Integer.toString(contador);
+		while(id.length() < 3) id = "0" + id;
+		String[] s = this.usuario.getNome().split(" ");
+		id = s[s.length-1].charAt(0) + id;
+		id = this.usuario.getNome().charAt(0) + id;
+		return id.toUpperCase();
+	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 

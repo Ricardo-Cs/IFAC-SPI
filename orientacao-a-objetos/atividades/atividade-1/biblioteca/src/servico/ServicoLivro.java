@@ -7,24 +7,25 @@ import repositorio.BDSimulado;
 
 public class ServicoLivro {
 	
-	public String criarLivro(String titulo, String autor, String ISBN, String editora, int qtdeExemplar) {
-		Livro l = new Livro(titulo, autor, ISBN, editora, qtdeExemplar);
-		if(BDSimulado.adicionarLivro(l)) {
+	public String cadastrarLivro(Livro livro) {
+		if(BDSimulado.adicionarLivro(livro)) {
 			return "\nLivro adicionado com sucesso!";
-		} else {
-			return "\nLivro não pode ser adicionado!";
 		}
+		return "\nLivro nao pode ser adicionado!";
 	}
 
 	public String listarLivros() {
 		String s = "";
-		for(Livro livro: BDSimulado.getLivros().values()) {
-			s += "\n------Livro Selecinado-------";
-			s += "TÃ­tulo: " + livro.getTitulo();
-		    s += "Autor: " + livro.getAutor();
-		    s += "ISBN: " + livro.getISBN();
-		    s += "Editora: " + livro.getEditora();
-		    s += "Exemplares: " + livro.getQtdeExemplar(); 
+		int contadorLivros = 1;
+		for (Livro livro : BDSimulado.getLivros().values()) {
+		    s += "\n------Livro " + contadorLivros + "-------";
+		    s += "\nTÃ­tulo: " + livro.getTitulo();
+		    s += "\nAutor: " + livro.getAutor();
+		    s += "\nISBN: " + livro.getISBN();
+		    s += "\nEditora: " + livro.getEditora();
+		    s += "\nExemplares: " + livro.getQtdeExemplar();
+		    s += "\n";
+		    contadorLivros++;
 		}
 		return s;
 	}
@@ -33,27 +34,28 @@ public class ServicoLivro {
 		Livro livroConsultado = BDSimulado.selecionarLivroPorISBN(ISBN);
 		if(livroConsultado != null) {
 			return "\nLivro encontrado!\n" + livroConsultado;
-		} else {
-			return "\nLivro não encontrado!";
 		}
+		return "\nLivro nï¿½o encontrado!";
 	}
 	
 	public String consultarLivrosAutor(String autor) {
 		ArrayList<Livro> livrosAutor = BDSimulado.selecionarLivroPorAutor(autor);
+		int contadorLivros = 1;
 		if(!livrosAutor.isEmpty()) {
 			String s = "\nLivros Encontrados!";
 			for(Livro livro: livrosAutor) {
-				s += "\n------Livro Selecinado-------";
-				s += "TÃ­tulo: " + livro.getTitulo();
-				s += "Autor: " + livro.getAutor();
-			    s += "ISBN: " + livro.getISBN();
-			    s += "Editora: " + livro.getEditora();
-			    s += "Exemplares: " + livro.getQtdeExemplar();
+				s += "\n------Livro " + contadorLivros + "-------";
+				s += "\nTÃ­tulo: " + livro.getTitulo();
+				s += "\nAutor: " + livro.getAutor();
+			    s += "\nISBN: " + livro.getISBN();
+			    s += "\nEditora: " + livro.getEditora();
+			    s += "\nExemplares: " + livro.getQtdeExemplar();
+			    s += "\n";
+			    contadorLivros++;
 			}
 			return s;
-		} else {
-			return "Não existem livros do autor " + autor;
 		}
+		return "\nNao existem livros do autor " + autor + "\n";
 	}
 	
 	public void removerLivro(String ISBN) {
