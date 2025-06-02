@@ -35,7 +35,19 @@ public class Livro {
 
 	public int getQtdeExemplar() {
 		return qtdeExemplar;
-	} 
+	}
+	
+	public boolean livroEmprestado() {
+		if(qtdeExemplar >= 2) {
+			this.qtdeExemplar--;
+			return true;
+		}
+		return false;
+	}
+	
+	public void livroDevolvido() {
+		qtdeExemplar++;
+	}
 	
 	@Override
 	public String toString() {

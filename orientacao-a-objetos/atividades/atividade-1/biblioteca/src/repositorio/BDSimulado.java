@@ -1,5 +1,6 @@
 package repositorio;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -80,10 +81,26 @@ public class BDSimulado {
 		}
 		Emprestimo emprestimo = new Emprestimo(livro, usuario);
 		emprestimos.put(emprestimo.getId(), emprestimo);
+		livros.get(livro.getISBN()).livroEmprestado();
 		return true;
 	}
 	
-//	public static boolean devolverLivro(Livro livro, Usuario usuario, String dataEmprestimo) {
-//		if(livros.)
-//	}
+	public static void devolverLivro(Emprestimo emprestimo, LocalDate dataDevolucao) {
+		emprestimo.setDevolvido(true);
+		emprestimo.setDataDevolucao(dataDevolucao);
+		emprestimo.getLivroEmprestado().livroDevolvido();
+	}
+
+	public static HashMap<String, Emprestimo> getEmprestimos() {
+		return emprestimos;
+	}
+	
+	public static ArrayList<Livro> livrosDisponiveis() {
+		ArrayList<Livro> livrosDisponiveis = new ArrayList<Livro>();
+		for(Livro livro: livros.values()) {
+			if(livro.getQtdeExemplar() > 1) livrosDisponiveis.add(livro);
+		}
+		
+		return livrosDisponiveis;
+	}
 }
