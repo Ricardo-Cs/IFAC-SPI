@@ -19,6 +19,7 @@ public class ServicoEmprestimo {
 		BDSimulado.devolverLivro(emprestimo, LocalDate.parse(dataDevolucao));
 		return "Livro devolvido com sucesso!";
 	}
-	
+
+	public String listarLivrosEmprestados()
 	
 }
