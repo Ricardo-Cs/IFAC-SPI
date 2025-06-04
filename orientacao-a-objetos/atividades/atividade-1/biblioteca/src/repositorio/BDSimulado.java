@@ -36,8 +36,9 @@ public class BDSimulado {
 	public static ArrayList<Livro> selecionarLivroPorAutor(String autor) {
 		ArrayList<Livro> livrosAutor = new ArrayList<Livro>();
 		for(Livro livro: livros.values()) {
-			if(livro.getAutor() == autor) {
+			if(livro.getAutor().equalsIgnoreCase(autor)) {
 				livrosAutor.add(livro);
+				System.out.println("Passou");
 			}
 		}
 		

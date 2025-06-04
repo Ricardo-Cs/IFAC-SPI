@@ -121,7 +121,7 @@ public class Aplicacao {
                 case 5: 
                 	System.out.print("Insira o autor para busca: ");
                 	busca = scanner.nextLine();
-                	servicoLivro.consultarLivrosAutor(busca);
+                	System.out.println(servicoLivro.consultarLivrosAutor(busca));
                 	break;
                 case 0: System.out.println("Voltando ao Menu Principal..."); break;
                 default: System.out.println("Opção inválida. Tente novamente.");
