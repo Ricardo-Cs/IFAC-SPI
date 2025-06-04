@@ -39,7 +39,7 @@ public class ServicoEmprestimo {
 		    s += "\n";
 		    contadorLivros++;
 		}
-		if (contadorLivros == 1) { // If no books were added, it means the list was empty
+		if (contadorLivros == 1) {
             return "Nenhum livro atualmente emprestado.";
         }
 		return s;
