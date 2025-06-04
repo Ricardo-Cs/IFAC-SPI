@@ -1,0 +1,41 @@
+-- 1. Exiba o nome do produto e use CASE para classificar o estoque: 'Baixo' se menor que 50, 'Médio' se entre 50 e 100, e 'Alto' se maior que 100.
+SELECT nome, 
+	CASE 
+		WHEN estoque < 50 THEN 'Baixo'
+        WHEN estoque BETWEEN 50 AND 100 THEN 'Médio'
+        ELSE 'Alto'
+	END AS classificacao_estoque
+FROM produtos;
+
+-- 2. Mostre o nome do produto e utilize IF para retornar 'Caro' se o preço for maior que 100, senão 'Barato'.
+SELECT nome, IF(preco > 100, 'Caro', 'Barato') as classificacao_preco
+FROM produtos;
+
+-- 3. Liste o nome do produto e utilize COALESCE para mostrar a descrição, ou 'Sem descrição' caso esteja nula.
+SELECT nome, COALESCE(descricao, 'Sem descrição') as descricao
+FROM produtos;
+
+-- 4. Utilize IFNULL para exibir a descrição dos produtos, substituindo os valores nulos por 'Descrição não informada'.
+SELECT nome, IFNULL(descricao, 'Sem Descrição') as descricao
+FROM produtos;
+
+-- 5. Mostre os produtos e classifique com CASE WHEN: 'Eletrônico' se categoria_id = 1, 'Roupas' se categoria_id = 2, 'Outros' caso contrário.
+SELECT nome, 
+	CASE 
+		WHEN categoria_id = 1 THEN 'Eletrônica'
+        WHEN categoria_id = 2 THEN 'Roupas'
+        ELSE 'Outros'
+	END AS categoria_produto
+FROM produtos;
+
+-- 6. Exiba nome, estoque e preço, e crie uma coluna chamada 'status' com IF que mostre 'Precisa repor' se estoque < 50 e preço > 50.
+SELECT nome, estoque, preco, IF(estoque < 50 AND preco > 50, 'Precisa Repor', 'Não precisa repor') AS status
+FROM produtos;
+
+-- 7. Mostre os produtos cujo estoque esteja entre 30 e 70 e crie uma coluna usando CASE que mostre 'Estoque moderado'.
+SELECT nome, 
+	CASE 
+		WHEN estoque BETWEEN 30 AND 70 THEN 'Estoque Moderado'
+	END as classificacao_estoque
+FROM produtos
+WHERE estoque >= 30 AND estoque <= 70;

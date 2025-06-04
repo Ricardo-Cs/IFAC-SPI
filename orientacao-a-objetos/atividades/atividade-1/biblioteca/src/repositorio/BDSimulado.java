@@ -107,12 +107,14 @@ public class BDSimulado {
 		return livrosDisponiveis;
 	}
 
-	public static ArrayList<Livro> livrosEmprestados() {
-		ArrayList<Livro> livrosEmprestados = new ArrayList<Livro>();
-		for(Emprestimo emprestimo: emprestimos.values()) {
-			if(!emprestimo.isDevolvido()) livrosEmprestados.add(emprestimo.getLivroEmprestado());
-		}
-		return livrosEmprestados;
+	public static HashMap<String, Livro> livrosEmprestados() {
+		HashMap<String, Livro> livrosEmprestados = new HashMap<>();
+        for(Emprestimo emprestimo : emprestimos.values()) {
+            if(!emprestimo.isDevolvido()) {
+                livrosEmprestados.put(emprestimo.getId(), emprestimo.getLivroEmprestado());
+            }
+        }
+        return livrosEmprestados;
 	}
 
     public static Emprestimo selecionarEmprestimoPorId(String id) {

@@ -66,7 +66,7 @@ public class Aplicacao {
     }
 
     private static void exibirMenuLivros() {
-        System.out.println("\n==== GERENCIAMENTO DE LIVROS ====");
+        System.out.println("\n---------------GERENCIAMENTO DE LIVROS---------------");
         System.out.println("1. Cadastrar Livro");
         System.out.println("2. Consultar Livro por ISBN");
         System.out.println("3. Listar Todos os Livros");
@@ -77,7 +77,7 @@ public class Aplicacao {
     }
 
     private static void exibirMenuUsuarios() {
-        System.out.println("\n==== GERENCIAMENTO DE USUARIOS ====");
+        System.out.println("\n---------------GERENCIAMENTO DE USUARIOS---------------");
         System.out.println("1. Cadastrar Usuario");
         System.out.println("2. Consultar Usuario por CPF");
         System.out.println("3. Listar Todos os Usuarios");
@@ -87,11 +87,12 @@ public class Aplicacao {
     }
 
     private static void exibirMenuEmprestimos() {
-        System.out.println("\n==== GERENCIAMENTO DE EMPRESTIMOS ====");
+        System.out.println("\n---------------GERENCIAMENTO DE EMPRESTIMOS---------------");
         System.out.println("1. Realizar Emprestimo");
         System.out.println("2. Registrar Devolucao");
-        System.out.println("3. Listar Todos os Livros Emprestados");
+        System.out.println("3. Listar os Livros Emprestados");
         System.out.println("4. Verificar Livros Disponiveis");
+        System.out.println("5. Histórico de Empréstimos");
         System.out.println("0. Voltar ao Menu Principal");
         System.out.print("Escolha uma opcao: ");
     }
@@ -213,6 +214,9 @@ public class Aplicacao {
                 case 4:
                     System.out.println(servicoEmprestimo.verificarLivrosDisponiveis());
                     break;
+                case 5:
+                	System.out.println(servicoEmprestimo.listarHistoricoEmprestimos());
+                	break;
                 case 0:
                     System.out.println("Voltando ao Menu Principal...");
                     break;

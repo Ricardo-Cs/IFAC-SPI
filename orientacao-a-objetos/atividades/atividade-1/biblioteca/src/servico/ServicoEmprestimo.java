@@ -1,6 +1,8 @@
 package servico;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+
 import modelo.Emprestimo;
 import modelo.Livro;
 import modelo.Usuario;
@@ -27,40 +29,76 @@ public class ServicoEmprestimo {
 	}
 
 	public String listarLivrosEmprestados() {
-		String s = "";
-		int contadorLivros = 1;
-		for (Livro livro : BDSimulado.livrosEmprestados()) {
-		    s += "\n------Livro " + contadorLivros + "-------";
-		    s += "\nT√≠tulo: " + livro.getTitulo();
-		    s += "\nAutor: " + livro.getAutor();
-		    s += "\nISBN: " + livro.getISBN();
-		    s += "\nEditora: " + livro.getEditora();
-		    s += "\nExemplares: " + livro.getQtdeExemplar();
-		    s += "\n";
-		    contadorLivros++;
-		}
-		if (contadorLivros == 1) {
-            return "Nenhum livro atualmente emprestado.";
-        }
-		return s;
+	    String s = "";
+	    int contadorLivros = 1;
+
+	    HashMap<String, Livro> livrosEmprestadosMap = BDSimulado.livrosEmprestados();
+
+	    if (livrosEmprestadosMap.isEmpty()) {
+	        return "Nenhum livro atualmente emprestado.";
+	    }
+
+	    for (HashMap.Entry<String, Livro> valor : livrosEmprestadosMap.entrySet()) {
+	        String codigoEmprestimo = valor.getKey();
+	        Livro livro = valor.getValue();       
+
+	        s += "\n------Livro " + contadorLivros + "-------";
+	        s += "\nCÛdigo do emprÈstimo: " + codigoEmprestimo;
+	        s += "\nTÌtulo: " + livro.getTitulo();
+	        s += "\nAutor: " + livro.getAutor();
+	        s += "\nISBN: " + livro.getISBN();
+	        s += "\nEditora: " + livro.getEditora();
+	        s += "\nExemplares: " + livro.getQtdeExemplar();
+	        s += "\n";
+	        contadorLivros++;
+	    }
+
+	    return s;
 	}
+	
+    public String listarHistoricoEmprestimos() {
+        String s = "";
+        int contadorEmprestimos = 1;
+        
+        HashMap<String, Emprestimo> emprestimos = BDSimulado.getEmprestimos();
+        
+        if (emprestimos.isEmpty()) {
+            return "Nenhum emprÈstimo registrado no histÛrico.";
+        }
+        
+        s += "\n--- HIST”RICO DE EMPR…STIMOS ---";
+        for (Emprestimo emprestimo : emprestimos.values()) {
+            s += "\n------EmprÈstimo " + contadorEmprestimos + "-------";
+            s += "\nID do EmprÈstimo: " + emprestimo.getId();
+            s += "\nLivro: " + emprestimo.getLivroEmprestado().getTitulo();
+            s += "\nUsu·rio: " + emprestimo.getUsuario().getNome();
+            s += "\nCPF do Usu·rio: " + emprestimo.getUsuario().getCpf();
+            s += "\nData do EmprÈstimo: " + emprestimo.getDataEmprestimo();
+            s += "\nDevolvido: " + (emprestimo.isDevolvido() ? "Sim" : "N„o");
+            if(emprestimo.isDevolvido()) s += "\nData de DevoluÁ„o: " + emprestimo.getDataDevolucao();
+            s += "\n";
+            contadorEmprestimos++;
+        }
+        
+        return s;
+    }
 
     public String verificarLivrosDisponiveis() {
         String s = "";
         int contadorLivros = 1;
         var livrosDisponiveis = BDSimulado.livrosDisponiveis();
         if (livrosDisponiveis.isEmpty()) {
-            return "Nenhum livro dispon√≠vel no momento.";
+            return "Nenhum livro disponÌvel no momento.";
         }
-        s += "\n--- LIVROS DISPON√çVEIS NA BIBLIOTECA ---";
+        s += "\n--- LIVROS DISPONÕVEIS NA BIBLIOTECA ---";
         for (Livro livro : livrosDisponiveis) {
             s += "\n------Livro " + contadorLivros + "-------";
-            s += "\nT√≠tulo: " + livro.getTitulo();
+            s += "\nTÌtulo: " + livro.getTitulo();
             s += "\nAutor: " + livro.getAutor();
             s += "\nISBN: " + livro.getISBN();
             s += "\nEditora: " + livro.getEditora();
             s += "\nExemplares Totais: " + livro.getQtdeExemplar();
-            s += "\nExemplares Dispon√≠veis: " + livro.getExemplaresDisponiveis();
+            s += "\nExemplares DisponÌveis: " + livro.getExemplaresDisponiveis();
             s += "\n";
             contadorLivros++;
         }
