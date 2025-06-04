@@ -102,7 +102,7 @@ public class BDSimulado {
 	public static ArrayList<Livro> livrosDisponiveis() {
 		ArrayList<Livro> livrosDisponiveis = new ArrayList<Livro>();
 		for(Livro livro: livros.values()) {
-			if(livro.getExemplaresDisponiveis() > 0) livrosDisponiveis.add(livro);
+			if(livro.getExemplaresDisponiveis() > 1) livrosDisponiveis.add(livro);
 		}
 		return livrosDisponiveis;
 	}
