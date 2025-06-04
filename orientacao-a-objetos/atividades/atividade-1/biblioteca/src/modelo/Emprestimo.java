@@ -10,7 +10,7 @@ public class Emprestimo {
 	private Usuario usuario;
 	private boolean devolvido = false;
 	private LocalDate dataEmprestimo = LocalDate.now();
-	private String dataDevolucao;
+	private LocalDate dataDevolucao;
 	
 	public Emprestimo(Livro livroEmprestado, Usuario usuario) {
 		this.livroEmprestado = livroEmprestado;
@@ -53,7 +53,15 @@ public class Emprestimo {
 		return dataEmprestimo;
 	}
 
-	public String getDataDevolucao() {
+	public LocalDate getDataDevolucao() {
 		return dataDevolucao;
+	}
+
+	public void setDevolvido(boolean devolvido) {
+		this.devolvido = devolvido;
+	}
+
+	public void setDataDevolucao(LocalDate dataDevolucao) {
+		this.dataDevolucao = dataDevolucao;
 	}
 }
