@@ -1,7 +1,6 @@
 package modelo;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Emprestimo {
 	private static int contador = 1;
@@ -11,26 +10,35 @@ public class Emprestimo {
 	private boolean devolvido = false;
 	private LocalDate dataEmprestimo = LocalDate.now();
 	private LocalDate dataDevolucao;
-	
+
 	public Emprestimo(Livro livroEmprestado, Usuario usuario) {
 		this.livroEmprestado = livroEmprestado;
 		this.usuario = usuario;
 		this.id = definirId();
 		contador++;
 	}
-	
+
 	public Emprestimo(Livro livroEmprestado, Usuario usuario, LocalDate dataEmprestimo) {
 		this(livroEmprestado, usuario);
 		this.dataEmprestimo = dataEmprestimo;
 	}
-	
+
 	private String definirId() {
-		String id = Integer.toString(contador);
-		while(id.length() < 3) id = "0" + id;
-		String[] s = this.usuario.getNome().split(" ");
-		id = s[s.length-1].charAt(0) + id;
-		id = this.usuario.getNome().charAt(0) + id;
-		return id.toUpperCase();
+		String id = String.format("%03d", contador);
+		String nomeCompleto = this.usuario.getNome();
+		String primeiraInicial = "";
+		String ultimaInicial = "";
+
+		if (nomeCompleto != null && !nomeCompleto.isEmpty()) {
+			primeiraInicial = String.valueOf(nomeCompleto.charAt(0));
+			String[] partesDoNome = nomeCompleto.split(" ");
+			if (partesDoNome.length > 1) {
+				ultimaInicial = String.valueOf(partesDoNome[partesDoNome.length - 1].charAt(0));
+			} else {
+				ultimaInicial = primeiraInicial;
+			}
+		}
+		return (primeiraInicial + ultimaInicial + id).toUpperCase();
 	}
 
 	public String getId() {
@@ -49,6 +57,10 @@ public class Emprestimo {
 		return devolvido;
 	}
 
+	public void setDevolvido(boolean devolvido) {
+	    this.devolvido = devolvido;
+	}
+
 	public LocalDate getDataEmprestimo() {
 		return dataEmprestimo;
 	}
@@ -57,11 +69,7 @@ public class Emprestimo {
 		return dataDevolucao;
 	}
 
-	public void setDevolvido(boolean devolvido) {
-		this.devolvido = devolvido;
-	}
-
 	public void setDataDevolucao(LocalDate dataDevolucao) {
-		this.dataDevolucao = dataDevolucao;
+	    this.dataDevolucao = dataDevolucao;
 	}
 }

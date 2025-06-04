@@ -12,12 +12,11 @@ public class BDSimulado {
 	private static HashMap<String, Livro> livros = new HashMap<String, Livro>();
 	private static HashMap<String, Usuario> usuarios = new HashMap<String, Usuario>();
 	private static HashMap<String, Emprestimo> emprestimos = new HashMap<String, Emprestimo>();
-	
-	// Metodos Livro
+
 	public static HashMap<String, Livro> getLivros() {
 		return livros;
 	}
-	
+
 	public static boolean adicionarLivro(Livro livro) {
 		String ISBN = livro.getISBN();
 		if(livros.containsKey(ISBN)) {
@@ -26,35 +25,32 @@ public class BDSimulado {
 		livros.put(ISBN, livro);
 		return true;
 	}
-	
+
 	public static Livro selecionarLivroPorISBN(String ISBN) {
 		if(livros.containsKey(ISBN)) {
 			return livros.get(ISBN);
 		}
 		return null;
 	}
-	
+
 	public static ArrayList<Livro> selecionarLivroPorAutor(String autor) {
 		ArrayList<Livro> livrosAutor = new ArrayList<Livro>();
 		for(Livro livro: livros.values()) {
 			if(livro.getAutor().equalsIgnoreCase(autor)) {
 				livrosAutor.add(livro);
-				System.out.println("Passou");
 			}
 		}
-		
 		return livrosAutor;
 	}
-	
+
 	public static void removerLivro(String ISBN) {
 		livros.remove(ISBN);
 	}
-	
-	// Metodos Usuario
+
 	public static HashMap<String, Usuario> getUsuarios() {
 		return usuarios;
 	}
-	
+
 	public static boolean adicionarUsuario(Usuario usuario) {
 		String cpf = usuario.getCpf();
 		if(usuarios.containsKey(cpf)) {
@@ -63,45 +59,63 @@ public class BDSimulado {
 		usuarios.put(cpf, usuario);
 		return true;
 	}
-	
+
 	public static Usuario selecionarUsuarioPorCPF(String CPF) {
 		if(usuarios.containsKey(CPF)) {
 			return usuarios.get(CPF);
 		}
 		return null;
 	}
-	
+
 	public static void removerUsuario(String CPF) {
 		usuarios.remove(CPF);
 	}
-	
-	// Metodos Emprestimo 
+
 	public static boolean emprestarLivro(Livro livro, Usuario usuario) {
-		if(livros.containsKey(livro.getISBN()) && livro.getQtdeExemplar() <= 1) {
+		if(livro == null || usuario == null) {
 			return false;
 		}
-		Emprestimo emprestimo = new Emprestimo(livro, usuario);
+		Livro livroExistente = livros.get(livro.getISBN());
+		if(livroExistente == null || !livroExistente.emprestarExemplar()) {
+			return false;
+		}
+		Emprestimo emprestimo = new Emprestimo(livroExistente, usuario);
 		emprestimos.put(emprestimo.getId(), emprestimo);
-		livros.get(livro.getISBN()).livroEmprestado();
 		return true;
 	}
-	
-	public static void devolverLivro(Emprestimo emprestimo, LocalDate dataDevolucao) {
-		emprestimo.setDevolvido(true);
-		emprestimo.setDataDevolucao(dataDevolucao);
-		emprestimo.getLivroEmprestado().livroDevolvido();
+
+	public static boolean devolverLivro(String emprestimoId, LocalDate dataDevolucao) {
+	    Emprestimo emprestimo = emprestimos.get(emprestimoId);
+	    if (emprestimo == null || emprestimo.isDevolvido()) {
+	        return false;
+	    }
+	    emprestimo.setDevolvido(true);
+	    emprestimo.setDataDevolucao(dataDevolucao);
+	    emprestimo.getLivroEmprestado().devolverExemplar();
+	    return true;
 	}
 
 	public static HashMap<String, Emprestimo> getEmprestimos() {
 		return emprestimos;
 	}
-	
+
 	public static ArrayList<Livro> livrosDisponiveis() {
 		ArrayList<Livro> livrosDisponiveis = new ArrayList<Livro>();
 		for(Livro livro: livros.values()) {
-			if(livro.getQtdeExemplar() > 1) livrosDisponiveis.add(livro);
+			if(livro.getExemplaresDisponiveis() > 0) livrosDisponiveis.add(livro);
 		}
-		
 		return livrosDisponiveis;
 	}
+
+	public static ArrayList<Livro> livrosEmprestados() {
+		ArrayList<Livro> livrosEmprestados = new ArrayList<Livro>();
+		for(Emprestimo emprestimo: emprestimos.values()) {
+			if(!emprestimo.isDevolvido()) livrosEmprestados.add(emprestimo.getLivroEmprestado());
+		}
+		return livrosEmprestados;
+	}
+
+    public static Emprestimo selecionarEmprestimoPorId(String id) {
+        return emprestimos.get(id);
+    }
 }
