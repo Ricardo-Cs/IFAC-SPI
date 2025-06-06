@@ -18,11 +18,11 @@ public class ServicoLivro {
 		String s = "";
 		int contadorLivros = 1;
 		if (BDSimulado.getLivros().isEmpty()) {
-            return "Nenhum livro cadastrado.";
+            return "\nNenhum livro cadastrado.";
         }
 		for (Livro livro : BDSimulado.getLivros().values()) {
 		    s += "\n------Livro " + contadorLivros + "-------";
-		    s += "\nTítulo: " + livro.getTitulo();
+		    s += "\nTitulo: " + livro.getTitulo();
 		    s += "\nAutor: " + livro.getAutor();
 		    s += "\nISBN: " + livro.getISBN();
 		    s += "\nEditora: " + livro.getEditora();

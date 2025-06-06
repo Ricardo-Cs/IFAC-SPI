@@ -109,7 +109,7 @@ public class Aplicacao {
                 	System.out.println(servicoLivro.cadastrarLivro(Utils.inserirDadosLivro()));
                 	break;
                 case 2:
-                	System.out.print("Insira o ISBN para busca: ");
+                	System.out.print("\nInsira o ISBN para busca: ");
                 	String busca = scanner.nextLine();
                 	System.out.println(servicoLivro.consultarLivro(busca));
                 	break;
@@ -117,17 +117,17 @@ public class Aplicacao {
                 	System.out.println(servicoLivro.listarLivros());
                 	break;
                 case 4:
-                	System.out.print("Insira o ISBN do livro para remover: ");
+                	System.out.print("\nInsira o ISBN do livro para remover: ");
                 	busca = scanner.nextLine();
                 	servicoLivro.removerLivro(busca);
                 	break;
                 case 5:
-                	System.out.print("Insira o autor para busca: ");
+                	System.out.print("\nInsira o autor para busca: ");
                 	busca = scanner.nextLine();
                 	System.out.println(servicoLivro.consultarLivrosAutor(busca));
                 	break;
-                case 0: System.out.println("Voltando ao Menu Principal..."); break;
-                default: System.out.println("Opcao invalida. Tente novamente.");
+                case 0: System.out.println("\nVoltando ao Menu Principal..."); break;
+                default: System.out.println("\nOpcao invalida. Tente novamente.");
             }
             if (opcaoLivro != 0) {
                 System.out.println("\nPressione Enter para continuar...");
@@ -149,7 +149,7 @@ public class Aplicacao {
                 	System.out.println(servicoUsuario.cadastrarUsuario(Utils.inserirDadosUsuario()));
                 	break;
                 case 2:
-                	System.out.print("Insira o CPF para busca: ");
+                	System.out.print("\nInsira o CPF para busca: ");
                 	busca = scanner.nextLine();
                 	System.out.println(servicoUsuario.consultarUsuario(busca));
                 	break;
@@ -157,12 +157,12 @@ public class Aplicacao {
                 	System.out.println(servicoUsuario.listarUsuarios());
                 	break;
                 case 4:
-                	System.out.print("Insira o CPF do usuario para remover: ");
+                	System.out.print("\nInsira o CPF do usuario para remover: ");
                 	busca = scanner.nextLine();
                 	servicoUsuario.removerUsuario(busca);
                 	break;
-                case 0: System.out.println("Voltando ao Menu Principal..."); break;
-                default: System.out.println("Opcao invalida. Tente novamente.");
+                case 0: System.out.println("\nVoltando ao Menu Principal..."); break;
+                default: System.out.println("\nOpcao invalida. Tente novamente.");
             }
             if (opcaoUsuario != 0) {
                 System.out.println("\nPressione Enter para continuar...");
@@ -182,29 +182,29 @@ public class Aplicacao {
 
             switch (opcaoEmprestimo) {
                 case 1:
-                    System.out.print("ISBN do Livro para emprestimo: ");
+                    System.out.print("\nISBN do Livro para emprestimo: ");
                     isbnLivro = scanner.nextLine();
                     Livro livroParaEmprestimo = BDSimulado.selecionarLivroPorISBN(isbnLivro);
 
                     if (livroParaEmprestimo == null) {
-                        System.out.println("Livro com ISBN " + isbnLivro + " nao encontrado.");
+                        System.out.println("\nLivro com ISBN " + isbnLivro + " nao encontrado.");
                         break;
                     }
 
-                    System.out.print("CPF do Usuario para emprestimo: ");
+                    System.out.print("\nCPF do Usuario para emprestimo: ");
                     cpfUsuario = scanner.nextLine();
                     Usuario usuarioParaEmprestimo = BDSimulado.selecionarUsuarioPorCPF(cpfUsuario);
 
                     if (usuarioParaEmprestimo == null) {
-                        System.out.println("Usuario com CPF " + cpfUsuario + " nao encontrado.");
+                        System.out.println("\nUsuario com CPF " + cpfUsuario + " nao encontrado.");
                         break;
                     }
                     System.out.println(servicoEmprestimo.emprestarLivro(livroParaEmprestimo, usuarioParaEmprestimo));
                     break;
                 case 2:
-                    System.out.print("ID do Emprestimo para devolucao: ");
+                    System.out.print("\nCódigo do Emprestimo para devolucao: ");
                     emprestimoId = scanner.nextLine();
-                    System.out.print("Data de Devolucao (YYYY-MM-DD): ");
+                    System.out.print("\nData de Devolucao (YYYY-MM-DD): ");
                     dataDevolucao = scanner.nextLine();
                     System.out.println(servicoEmprestimo.devolverLivro(emprestimoId, dataDevolucao));
                     break;
@@ -218,10 +218,10 @@ public class Aplicacao {
                 	System.out.println(servicoEmprestimo.listarHistoricoEmprestimos());
                 	break;
                 case 0:
-                    System.out.println("Voltando ao Menu Principal...");
+                    System.out.println("\nVoltando ao Menu Principal...");
                     break;
                 default:
-                    System.out.println("Opcao invalida. Tente novamente.");
+                    System.out.println("\nOpcao invalida. Tente novamente.");
             }
             if (opcaoEmprestimo != 0) {
                 System.out.println("\nPressione Enter para continuar...");

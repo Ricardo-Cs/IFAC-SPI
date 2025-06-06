@@ -6,16 +6,16 @@ import repositorio.BDSimulado;
 public class ServicoUsuario {
 	public String cadastrarUsuario(Usuario usuario) {
 		if(BDSimulado.adicionarUsuario(usuario)) {
-			return "Usuario adicionado com sucesso!";
+			return "\nUsuario adicionado com sucesso!";
 		}
-		return "Usuario nao pode ser adicionado! CPF ja existente.";
+		return "\nUsuario nao pode ser adicionado! CPF ja existente.";
 	}
 
 	public String listarUsuarios() {
 		String s = "";
 		int contadorUsuarios = 1;
 		if (BDSimulado.getUsuarios().isEmpty()) {
-            return "Nenhum usuario cadastrado.";
+            return "\nNenhum usuario cadastrado.";
         }
 		for(Usuario usuario: BDSimulado.getUsuarios().values()) {
 			s += "\n------Usuario " + contadorUsuarios + "-------";
@@ -33,7 +33,7 @@ public class ServicoUsuario {
 		if(usuarioConsultado != null) {
 			return "\nUsuario Encontrado!\n" + usuarioConsultado;
 		}
-		return "Usuario nao encontrado!";
+		return "\nUsuario nao encontrado!";
 	}
 
 	public void removerUsuario(String CPF) {

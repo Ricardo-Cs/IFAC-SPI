@@ -11,9 +11,9 @@ import repositorio.BDSimulado;
 public class ServicoEmprestimo {
 	public String emprestarLivro(Livro livro, Usuario usuario) {
 		if(BDSimulado.emprestarLivro(livro, usuario)) {
-			return "Livro Emprestado com Sucesso!";
+			return "\nLivro Emprestado com Sucesso!";
 		}
-		return "Nao foi possivel emprestar esse livro! Verifique se ha exemplares disponiveis.";
+		return "\nNao foi possivel emprestar esse livro! Verifique se ha exemplares disponiveis.";
 	}
 
 	public String devolverLivro(String emprestimoId, String dataDevolucaoString) {
@@ -22,9 +22,9 @@ public class ServicoEmprestimo {
 	        if(BDSimulado.devolverLivro(emprestimoId, dataDevolucao)) {
 	            return "Livro devolvido com sucesso!";
 	        }
-	        return "Nao foi possivel devolver o livro. Verifique o ID do emprestimo ou se ja foi devolvido.";
+	        return "\nNao foi possivel devolver o livro. Verifique o ID do emprestimo ou se ja foi devolvido.";
 	    } catch (java.time.format.DateTimeParseException e) {
-	        return "Formato de data invalido. Use YYYY-MM-DD.";
+	        return "\nFormato de data invalido. Use YYYY-MM-DD.";
 	    }
 	}
 
@@ -35,7 +35,7 @@ public class ServicoEmprestimo {
 	    HashMap<String, Livro> livrosEmprestadosMap = BDSimulado.livrosEmprestados();
 
 	    if (livrosEmprestadosMap.isEmpty()) {
-	        return "Nenhum livro atualmente emprestado.";
+	        return "\nNenhum livro atualmente emprestado.";
 	    }
 
 	    for (HashMap.Entry<String, Livro> valor : livrosEmprestadosMap.entrySet()) {
@@ -63,7 +63,7 @@ public class ServicoEmprestimo {
         HashMap<String, Emprestimo> emprestimos = BDSimulado.getEmprestimos();
         
         if (emprestimos.isEmpty()) {
-            return "Nenhum empréstimo registrado no histórico.";
+            return "\nNenhum empréstimo registrado no histórico.";
         }
         
         s += "\n--- HISTÓRICO DE EMPRÉSTIMOS ---";
@@ -88,7 +88,7 @@ public class ServicoEmprestimo {
         int contadorLivros = 1;
         var livrosDisponiveis = BDSimulado.livrosDisponiveis();
         if (livrosDisponiveis.isEmpty()) {
-            return "Nenhum livro disponível no momento.";
+            return "\nNenhum livro disponível no momento.";
         }
         s += "\n--- LIVROS DISPONÍVEIS NA BIBLIOTECA ---";
         for (Livro livro : livrosDisponiveis) {
