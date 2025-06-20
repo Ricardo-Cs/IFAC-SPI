@@ -1,4 +1,4 @@
-package modelo;
+package com.example.modelo;
 import java.util.HashMap;
 
 public class Departamento {
@@ -9,29 +9,33 @@ public class Departamento {
 	public Departamento(String nome, String id) {
 		this.nome = nome;
 		this.id = id;
-	}
-	
-	public boolean adicionarFuncionario(Funcionario funcionario) {
-		if(this.funcionarios.get(funcionario.getMatricula()) == null) {
-			this.funcionarios.put(funcionario.getMatricula(), funcionario);
-			return true;
-		}
-		return false;
+		//Criaï¿½ï¿½o de um novo mapa a cada novo Departamento
+		this.funcionarios = new HashMap<String, Funcionario>(); 
 	}
 	
 	public String getId() {
 		return id;
 	}
 	
+	public boolean adicionarFuncionario(Funcionario f) {
+		//Verificar se o funcionÃ¡rio jÃ¡ nÃ£o pertece ao departamento (pelo valor)
+		if(this.funcionarios.containsKey(f.getMatricula())) {
+			return false;
+		}
+		this.funcionarios.put(f.getMatricula(), f);
+		return true;
+	}
+	
 	public boolean removerFuncionario(String matricula) {
 		if(this.funcionarios.containsKey(matricula)) {
 			funcionarios.remove(matricula);
+			return true;
 		}
 		return false;
 	}
 	
 	public String listarFuncionarios() {
-		String lista = "\n";
+		String lista = "Funcionï¿½rios do " + this.nome + "\n";
 		for(String m : this.funcionarios.keySet()) {
 			lista += m + " - " + this.funcionarios.get(m).getNome() + "\n";
 		}
@@ -39,11 +43,11 @@ public class Departamento {
 	}
 	
 	public String emitirRelatorioUmFuncionario(String matriculaFuncionario) {
-		if(this.funcionarios.containsKey(matriculaFuncionario)) {
-			return "Este funcionário não pertence ao departamento " + this.nome;
-		}
-		
-		return this.funcionarios.get(matriculaFuncionario).toString() + 
-				"\nDepartamento " + this.nome;
+		return this.funcionarios.get(matriculaFuncionario).toString() +
+				"\nDepartamento: " + this.nome;
+	}
+	
+	public int getQuantidadeFuncionarios() {
+		return this.funcionarios.size();
 	}
 }
