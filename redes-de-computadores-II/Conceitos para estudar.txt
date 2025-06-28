@@ -1,0 +1,4 @@
+DHCP
+Classes de IP
+
+192.168.1.0 - é a rede em si
