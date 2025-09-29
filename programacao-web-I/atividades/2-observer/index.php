@@ -1,12 +1,11 @@
 <?php
-require_once __DIR__ . '/User.php';
-require_once __DIR__ . '/NewsAgency.php';
+require_once "Pedido.php";
+require_once "EmailNotifier.php";
+require_once "SmsNotifier.php";
 
-$agency = new NewsAgency();
-$u1 = new User("Ricardo");
-$u2 = new User("Maria");
+$pedido = new Pedido();
+$pedido->attach(new EmailNotifier());
+$pedido->attach(new SmsNotifier());
 
-$agency->subscribe($u1);
-$agency->subscribe($u2);
-
-$agency->setNews("Novo jogo lançado!");
+$pedido->setStatus("Confirmado");
+$pedido->setStatus("Enviado");
