@@ -5,11 +5,11 @@ class Pedido {
     private array $observers = [];
     private string $status;
 
-    public function attach(Observer $observer): void {
+    public function attach(IObserver $observer): void {
         $this->observers[] = $observer;
     }
 
-    public function detach(Observer $observer): void {
+    public function detach(IObserver $observer): void {
         $this->observers = array_filter(
             $this->observers,
             fn($obs) => $obs !== $observer
