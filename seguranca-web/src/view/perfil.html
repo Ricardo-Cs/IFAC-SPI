@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<body>
+    <h2>Perfil do Usuário</h2>
+    <div id="content">Carregando...</div>
+    <hr>
+    <p><small>Tente mudar o ID na URL para ver o IDOR em ação.</small></p>
+
+    <script>
+        const token = localStorage.getItem("token");
+        const id = new URLSearchParams(location.search).get("id");
+
+        if (!token) {
+            alert("Acesso negado. Faça login.");
+            location.href = "/";
+        }
+
+        async function loadProfile() {
+            const res = await fetch(`/api/users/${id}`, {
+                headers: { Authorization: `Bearer ${token}` }
+            })
+            const data = await res.json();
+            document.getElementById("content").innerHTML = res.ok
+                ? `<pre>${JSON.stringify(data, null, 2)}</pre>`
+                : `<p style="color:red">${data.error || "Erro ao carregar"}</p>`;
+        }
+
+        loadProfile();
+    </script>
+</body>
+
+</html>
