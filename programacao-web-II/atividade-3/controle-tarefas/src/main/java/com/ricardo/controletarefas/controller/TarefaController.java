@@ -29,4 +29,17 @@ public class TarefaController {
         Tarefa registro = service.save(tarefa);
         return new ResponseEntity<>(registro, HttpStatus.CREATED);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Tarefa> update(@PathVariable Long id, @RequestBody Tarefa tarefa) {
+        tarefa.setId(id);
+        Tarefa registro = service.update(tarefa);
+        return new ResponseEntity<>(registro, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        service.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
