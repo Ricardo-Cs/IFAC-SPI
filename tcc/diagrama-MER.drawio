@@ -1,0 +1,19 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Página-1" id="VSs9lJxOYC75RXgeLvla">
+    <mxGraphModel dx="1414" dy="777" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="fqhh3HMpXRdg5kQkB9DE-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Professor" vertex="1">
+          <mxGeometry height="60" width="120" x="40" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="fqhh3HMpXRdg5kQkB9DE-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Turma" vertex="1">
+          <mxGeometry height="60" width="120" x="340" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="fqhh3HMpXRdg5kQkB9DE-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Disciplina" vertex="1">
+          <mxGeometry height="60" width="120" x="40" y="170" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
