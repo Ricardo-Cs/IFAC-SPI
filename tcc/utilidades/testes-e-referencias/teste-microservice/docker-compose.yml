@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  api-nest:
+    build: ./api-nest
+    ports:
+      - "3000:3000"
+    depends_on:
+      - ms-python
+
+  ms-python:
+    build: ./ms-python
+    ports:
+      - "8000:8000"
